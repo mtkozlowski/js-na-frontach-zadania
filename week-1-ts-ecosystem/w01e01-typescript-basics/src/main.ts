@@ -1,30 +1,43 @@
-/**
- * Zasady co do pliku:
- *
- * Możesz dowolnie modyfikować zawartość tego pliku,
- * całość programu musi jednak działać tak jak do tej pory !
- *
- * */
+type Age = number;
+type AgeStage = 'minor' | 'adult' | 'senior';
 
-const user: any = {
-  name: 'Andy',
-  age: 30,
-  email: 'andy@mail-me-tommorow.com',
-  address: {
-    street: 'Strange Alley',
-    no: 23,
-  },
+interface Address {
+  street: string,
+  no: number,
 }
 
-function hasAddress(user: any): any {
-  return Boolean(user.address)
+interface IUser {
+  name: string,
+  age: Age,
+  email: string,
+  address?: Address;
+  hasAddress: () => Boolean,
+  isAdult: (requiredAge: Age) => string,
 }
 
-function hasGivenAge(requiredAge: any): any {
-  return (user: any): any => user.age >= requiredAge
+class User implements IUser {
+  name: string;
+  age: Age;
+  email: string;
+  address?: Address;
+
+  constructor(name: string, email: string, age: Age, address?: Address) {
+    this.name = name;
+    this.age = age;
+    this.email = email;
+    this.address = address;
+  }
+
+  hasAddress(): Boolean {
+    return Boolean(this.address);
+  }
+
+  isAdult(requiredAge: Age): AgeStage {
+    return this.age >= requiredAge ? 'adult': 'minor';
+  }
 }
 
-const isAdult = hasGivenAge(18)
+const user = new User('Andy', 'andy@mail-me-tommorow.com', 30, { street: 'Main Street', no: 1 });
 
-console.log(`User ${user.name} is ${isAdult(user) ? 'adult' : 'minor'}`)
-console.log(`and has${hasAddress(user) ? '' : ' no'} address`)
+console.log(`User ${user.name} is ${user.isAdult(18)}`)
+console.log(`and has${user.hasAddress() ? '' : ' no'} address`)
