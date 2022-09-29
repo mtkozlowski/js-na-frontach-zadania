@@ -1,11 +1,24 @@
-import { div } from '../framework/dom-creators.js'
+import { div } from '../framework/dom-creators'
 
-export function cartItem({ name, amount, unit, price }) {
+export interface Price {
+  value: number,
+  currency: string
+}
+
+export interface ICartItem {
+  name: string,
+  amount: number,
+  unit: string,
+  price: Price
+}
+
+
+export function cartItem({ name, amount, unit, price }: ICartItem): HTMLElement {
   const $panelBlock = div('panel-block')
   const $name = div()
   $name.textContent = name
   const $amount = div('ml-auto')
-  $amount.textContent = amount
+  $amount.textContent = amount.toString()
   const $unit = div('tag')
   $unit.textContent = unit
   const $price = div('ml-4')

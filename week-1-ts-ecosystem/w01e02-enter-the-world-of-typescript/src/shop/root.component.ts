@@ -1,8 +1,9 @@
-import { div } from '../framework/dom-creators.js'
+import { div } from '../framework/dom-creators'
 import { cartPanel } from './cart-panel.component.js'
 import { hero } from './hero.component.js'
+import {ICartItem} from "./cart-item.component";
 
-const items = [
+const items: Array<ICartItem> = [
   {
     name: 'Tomatoes',
     amount: 2,
