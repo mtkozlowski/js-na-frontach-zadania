@@ -9,3 +9,11 @@
  * Przygotuj koszyki dla każdego rodzaju produktów.
  * - po prostu: wykaż, że przygotowana logika i modele danych — działają :)
  * */
+
+import {Cart} from './components/Cart';
+import {AuctionCartItem, BuyNowItem, CartItemBase, IBuyNowItem} from "./components/Cart/cartItemBase";
+
+const cart = new Cart<IBuyNowItem>();
+const newItem = new BuyNowItem(100, 'test')
+newItem.itemType
+cart.add(newItem);
